@@ -1,0 +1,9 @@
+  
+.board {
+
+}
+  
+
+.scrollbar-invisble::-webkit-scrollbar{
+  display: none;
+}

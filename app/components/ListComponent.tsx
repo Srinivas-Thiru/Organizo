@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import Card from './Card';
 import AddCardBtn from './AddCardBtn';
+import { RiDeleteBinLine } from 'react-icons/ri';
+import "../globals.css"
 
 const ListComponent =  ({allBoards, setAllBoards, newCurrentB, newLists, setNewLists,listObj, setNewCurrentB, session      }) => {  
 
@@ -82,15 +84,17 @@ const ListComponent =  ({allBoards, setAllBoards, newCurrentB, newLists, setNewL
 
    return (
     <div style={{height: 'auto'}}>
-    <div className="w-[225px] rounded-lg p-4 shadow-md bg-slate-50 mx-5 my-5"  >
-    <div className='flex'>
-    <h2 className="text-lg font-semibold mb-2">LIST NAME: {newLists && (listObj.title)}</h2>
+    <div className="w-[225px] rounded-lg shadow-md bg-[#f3efec] mx-5"  >
+    <div className='flex justify-between p-2'>
+    <h2 className="text-lg font-semibold  w-screen text-center">{newLists && (listObj.title)}</h2>
 
 
-    <button onClick={delList}>Del</button>
+    <button className="text-[#dd8458] text-[20px] delBtn" onClick={delList}>
+      <RiDeleteBinLine  />
+    </button>
     </div>
 
-    <div className="space-y-4">
+    <div >
       {cards && cards.map((card) => (
         <>
           <Card cards={cards} setCards={setCards} newCurrentB={newCurrentB}  cardObj={card} newLists={newLists} setNewLists={setNewLists} />

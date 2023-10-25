@@ -3,6 +3,7 @@
 import { Button } from '@mui/material'
 import React, { useState } from 'react'
 import AddCardModal from './AddCardModal'
+import ButtonCmp from './Button/ButtonCmp'
 
 const AddListBtn = ({allBoards, setAllBoards,  newLists, setNewLists, boardId, setNewCurrentB, newCurrentB}) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -46,7 +47,7 @@ const AddListBtn = ({allBoards, setAllBoards,  newLists, setNewLists, boardId, s
     }
 
   return (
-    <div>
+    <div >
         {isOpen && 
         <AddCardModal setIsOpen={setIsOpen} isOpen = {isOpen} >
             <div className='mx-10'> 
@@ -61,7 +62,10 @@ const AddListBtn = ({allBoards, setAllBoards,  newLists, setNewLists, boardId, s
             </div>
         </AddCardModal>
         }
-        <Button className='px-4 py-2 m-5 w-24 bg-gray-700 text-white ' style={{width: '24ch'}} onClick={handleClick}> + Add List</Button>
+        <div className='w-[30ch] text-[rgba(255,255,255,0.8)]'>
+          <ButtonCmp id={"addListBtn"} handleClick={handleClick}> + Add New List</ButtonCmp>
+        </div>
+        
     </div>
   )
 }

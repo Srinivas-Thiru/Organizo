@@ -4,6 +4,8 @@
 import { Button } from '@mui/material'
 import React, { useState } from 'react'
 import AddCardModal from './AddCardModal'
+import ButtonCmp from './Button/ButtonCmp'
+import "./Button/ButtonCmp.css"
 
 const AddCardBtn = ({newLists, setNewLists, cards, setCards, newCurrentB, id, session}) => {
     
@@ -120,7 +122,9 @@ const AddCardBtn = ({newLists, setNewLists, cards, setCards, newCurrentB, id, se
             </div>
         </AddCardModal>
         }
-        <Button id={id} onClick={handleClickAddCard}>+</Button>
+        <div className='flex justify-center w-full text-black '>
+            <button className='glass-button mx-1 my-4 bg-[#dcd6cc73] hover:bg-[#dcd6cc]' id={id} handleClick={handleClickAddCard}>+</button>
+        </div>
         </>
   )
 }

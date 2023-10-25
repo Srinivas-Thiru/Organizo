@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: #3d3d70; /* Light blue */
-  --background-end-rgb: #b3b1e1; 
+  --foreground-rgb: #4F5453;
+  --background-start-rgb:#718fc0; /* Light blue */
+  --background-end-rgb: #f2f1ef; 
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -18,13 +18,39 @@
 
 body {
   overflow: hidden;
-  padding: 1rem;
-    background: linear-gradient(
-      to bottom,
-      rgba(var(--background-start-rgb), 1),
-      rgba(var(--background-end-rgb), 1)
-    );
-    color: rgba(var(--foreground-rgb), 1);
-}
-  
 
+  background-color: #debba9;
+  color: rgba(var(--foreground-rgb), 1);
+}
+
+
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.board {
+  background-color: #b6b2ab;
+  /* bg-[#A9A59D] */
+  }
+
+
+
+  .sidenavbtn-selected {
+    border-radius: 20px 0 0 20px;
+    /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); */
+    /* background: radial-gradient(at center, #fff, #A9A59D); */
+
+  }
+  .sidenavbtn {
+    margin: auto;
+  }
+  .sidenavbtn:hover {
+    border-radius: 20px 0 0 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    /* background: radial-gradient(at center, #fff, #A9A59D); */
+  }
+
+  .delBtn:hover {
+    scale:1.3;
+  }

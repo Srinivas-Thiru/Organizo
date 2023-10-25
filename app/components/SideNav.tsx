@@ -5,6 +5,8 @@ import { useState  } from 'react'
 import AddCardModal from './AddCardModal'
 import { Button } from '@mui/material'
 import { UsersDropdown } from './UsersDropdown'
+import ButtonCmp from './Button/ButtonCmp'
+import "../globals.css"
 
 
 const SideNav = ({newCurrentB, setNewCurrentB, setAllBoards, allBoards, session }) => {
@@ -74,18 +76,23 @@ const SideNav = ({newCurrentB, setNewCurrentB, setAllBoards, allBoards, session 
 
 
 
-        <div className="bg-gray-300 mt-3 rounded-xl text-center py-3" style={{ height: '80vh', width:'11vw'}}>
+        <div className="sidenav bg-[#f3efec] text-black text-center py-3 rounded-3xl" style={{ height: '90vh', width:'11vw'}}>
+        <div className='w-[11vw] p-2 mb-3 text-center shadow-md'>
+          YOUR BOARDS
+        </div>
         {allBoards.map((board) => (
           board._id === newCurrentB._id ?
-          <div key={board._id} onClick={handleSideNavClick} id={board._id} className="bg-gray-600 text-white cursor-pointer my-3 rounded border-solid border-black">
+          <div key={board._id} onClick={handleSideNavClick} id={board._id} className=" sidenavbtn-selected  board cursor-pointer my-1  border-solid border-black py-3">
             {board.title}
           </div>
           :
-          <div key={board._id}  onClick={handleSideNavClick} id={board._id} className="hover:bg-gray-600 hover:text-white cursor-pointer my-3 rounded border-solid border-black">
+          <div key={board._id}  onClick={handleSideNavClick} id={board._id} className="group sidenavbtn hover:bg-[#A9A59D] cursor-pointer my-1 py-3 rounded border-solid border-black">
             {board.title}
           </div>
         ))}
-      <button onClick={handleClick}  id={session.user._id} > + Create New</button>
+        <div className='mt-3 text-black'>
+          <ButtonCmp handleClick={handleClick}  id={session.user._id} > + Create New Board </ButtonCmp>
+        </div>
       </div>
 
     </div>

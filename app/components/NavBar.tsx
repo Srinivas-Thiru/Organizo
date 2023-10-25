@@ -13,8 +13,8 @@ const NavBar = () => {
   };
 
   return (
-    <div className='p-4 flex justify-between items-center shadow-md'>
-      <Link className='font-bold text-lg' href='/'>
+    <div className=' px-9 py-4 bg-[white] flex justify-between items-center h-[11vh]'>
+      <Link className='font-bold text-lg '  href='/'>
         Organizo
       </Link>
       {status === 'authenticated' ? (

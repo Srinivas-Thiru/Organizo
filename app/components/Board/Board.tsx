@@ -11,7 +11,7 @@ import { Button } from '@mui/material';
 import RightNav from '../RightNav';
 import DeleteBoard from './DeleteBoard';
 import BoardNav from './BoardNav';
-
+import "./board.css"
   
 const Board =  ({newCurrentB, setNewCurrentB, setAllBoards, allBoards, session }) => {
   //NEWWAY
@@ -89,18 +89,14 @@ useEffect(() => {
     }
   } 
 }
- 
-
-
-///
 
   return (
-    <>
-    <div className='m-3 bg-slate-500 rounded-md p-2' style={{ position:'relative', height: '80vh', width:'75vw', overflowX: "scroll" }}>
+    <div className='flex rounded-lg '>
+    <div className='board scrollbar-invisble mr-3 ' style={{  height: '89vh', width:'89vw', overflowX: "scroll" }}>
       <BoardNav newCurrentB={newCurrentB} setNewCurrentB={setNewCurrentB} newDelBoard={newDelBoard} />
      {/* {// w-screen} */}
 
-     <div className='flex pt-5 mt-5'>
+     <div className='flex pt-5 mt-10'>
 
      {newLists && newLists.map((obj) => obj && <ListComponent key={obj._id} session={session}  newCurrentB={newCurrentB}  newLists={newLists} setNewLists={setNewLists} listObj={obj} setNewCurrentB={setNewCurrentB} allBoards={allBoards} setAllBoards={setAllBoards} />)}
      <AddListBtn allBoards={allBoards} setAllBoards={setAllBoards} newCurrentB={newCurrentB} newLists={newLists} setNewLists={setNewLists} boardId={newCurrentB._id} setNewCurrentB={setNewCurrentB} >
@@ -109,7 +105,7 @@ useEffect(() => {
 
     </div>
     </div>
-    </>
+    </div>
   )
 }
 

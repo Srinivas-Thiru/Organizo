@@ -36,7 +36,8 @@ const Card = ({cards, setCards, newCurrentB, cardObj, newLists, setNewLists }) =
       {cardIsopen && <>
         <AddCardModal setIsOpen={setCardIsOpen} isOpen = {cardIsopen} >
           <div className='flex justify-center p-5'>
-            <span className="text-center text-3xl font-bold bg-slate-300">{cardObj.title}</span>
+            <span className="text-center text-3xl font-bold bg-[#f3efec]">{cardObj.title}</span>
+            <br />Description: {cardObj.description}
           </div>
           <Button id={cardObj._id} className='bg-red-500 p-2' onClick={deleteReq} >DELETE</Button>
         </AddCardModal>
@@ -45,11 +46,10 @@ const Card = ({cards, setCards, newCurrentB, cardObj, newLists, setNewLists }) =
 
       {cardObj && <div 
         onClick={handleClick}
-        className="bg-slate-200 border rounded-lg p-4 m-4 cursor-pointer"
+        className="bg-white border rounded-lg p-2 my-2 m-1 cursor-pointer"
         id={cardObj._id}
       >
         TITLE: {cardObj.title}
-        <br />DESC: {cardObj.description}
       </div>}</>
   );
 };

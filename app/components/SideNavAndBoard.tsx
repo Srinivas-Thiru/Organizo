@@ -70,9 +70,12 @@ const SideNavAndBoard = ({newBoards, boardsData, session}) => {
 
 
     return (
-    <div className='flex h-screen'> 
-         { newCurrentB && <><SideNav  newCurrentB={newCurrentB} setNewCurrentB = {setNewCurrentB}  allBoards={allBoards} setAllBoards={setAllBoards}  session={session}             />
-        <Board session={session}  newCurrentB={newCurrentB} setNewCurrentB = {setNewCurrentB}  allBoards={allBoards} setAllBoards={setAllBoards}                                 ></Board>
+    <div className='flex h-screen rounded-3xl bg-[#b6b2ab]'> 
+         { newCurrentB && <><SideNav  newCurrentB={newCurrentB} setNewCurrentB = {setNewCurrentB}  allBoards={allBoards} setAllBoards={setAllBoards}  session={session}/>
+       <div className='bg-[#EDE8E4] '>
+
+        <Board session={session}  newCurrentB={newCurrentB} setNewCurrentB = {setNewCurrentB}  allBoards={allBoards} setAllBoards={setAllBoards}></Board>
+       </div>
      {/* <RightNav currentBoardId={currentBoardId} boardsArray={boards}/> */}
 
         </>}
