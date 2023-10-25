@@ -1,0 +1,69 @@
+'use client'
+
+import { Button } from '@mui/material'
+import React, { useState } from 'react'
+import AddCardModal from './AddCardModal'
+
+const AddListBtn = ({allBoards, setAllBoards,  newLists, setNewLists, boardId, setNewCurrentB, newCurrentB}) => {
+    const [isOpen, setIsOpen] = useState(false)
+
+     function handleClick() {
+        setIsOpen(!isOpen)
+    }
+
+    async function handleSubmit(e: any) {
+        e.preventDefault();
+        const data = {
+            title:e.target.title.value,
+            cards: [],
+            boardId:boardId
+        }
+
+        const res = await fetch("http://localhost:3000/api/lists", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+        if (!res.ok) {
+            throw new Error("Update Failed")
+        }else {
+            const newList= await res.json();
+            setNewLists((prevNewLists) => [...prevNewLists, newList ]);
+            const Boards = allBoards.map((board) => {
+                if(board._id === newCurrentB._id) {
+                    return { ...board, lists:[...board.lists,newList.list._id]};
+                }
+                else{
+                    return board;
+                    }
+            })
+            console.log("NEW BOARDS AFTER DELETING A LIST:" ,Boards)
+            setAllBoards(Boards)          
+        }
+        setIsOpen(!isOpen)
+    }
+
+  return (
+    <div>
+        {isOpen && 
+        <AddCardModal setIsOpen={setIsOpen} isOpen = {isOpen} >
+            <div className='mx-10'> 
+                <span className="flex justify-center font-bold text-3xl">New List</span>
+                <form onSubmit={handleSubmit}>
+                    <div className='flex flex-col my-4'>
+                        <label htmlFor="title">List Title: </label>
+                        <input required={true}  className='border-solid bg-gray-100 border-spacing-1' type="text" id="title"/>
+                    </div>                                        
+                    <Button id={boardId} type='submit' className='px-4 py-1 mb-3 w-24 bg-gray-700 text-white '>Submit</Button>
+                </form>
+            </div>
+        </AddCardModal>
+        }
+        <Button className='px-4 py-2 m-5 w-24 bg-gray-700 text-white ' style={{width: '24ch'}} onClick={handleClick}> + Add List</Button>
+    </div>
+  )
+}
+
+export default AddListBtn
