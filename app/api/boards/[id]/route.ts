@@ -4,10 +4,14 @@ import { NextResponse } from "next/server"
 
 export async function PUT(request, {params}) {
     const {id} = params
-    const {newTitle: title, newLists: lists, newUsers: users} = await request.json()
+    const {newTitle: title} = await request.json()
     await connectMongoDB()
-    await Board.findByIdAndUpdate(id, {title,lists, users})
-    return NextResponse.json({message: "Updated Successfully"}, {status: 200})
+    const updatedBoard = await Board.findOneAndUpdate(
+        { _id: id }, 
+        { $set: { title } }, 
+        { new: true } 
+      );
+    return NextResponse.json({message: "Updated Successfully", board:updatedBoard}, {status: 200})
 }
 
 export async function GET(request, {params}) {

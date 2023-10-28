@@ -63,18 +63,23 @@ const getLists = async(listId) => {
   }
 }
 
-const SideNavAndBoard = ({newBoards, boardsData, session}) => {
-     
-  const [newCurrentB, setNewCurrentB] = useState(newBoards[0]);
-  const [allBoards, setAllBoards] = useState(newBoards)
+const SideNavAndBoard = ( {boardId ={}  ,allUsers,newBoards, boardsData, session}) => {
 
+  const [newCurrentB, setNewCurrentB] = useState(newBoards.find((board) => board._id === boardId.id) || newBoards[0]);
+
+  const [allBoards, setAllBoards] = useState(newBoards)
+  const[isOpen, setIsOpen] = useState(false)
+
+  function handleClick() {
+    return setIsOpen(!isOpen)
+}
 
     return (
-    <div className='flex h-screen rounded-3xl bg-[#b6b2ab]'> 
-         { newCurrentB && <><SideNav  newCurrentB={newCurrentB} setNewCurrentB = {setNewCurrentB}  allBoards={allBoards} setAllBoards={setAllBoards}  session={session}/>
-       <div className='bg-[#EDE8E4] '>
-
-        <Board session={session}  newCurrentB={newCurrentB} setNewCurrentB = {setNewCurrentB}  allBoards={allBoards} setAllBoards={setAllBoards}></Board>
+    <div className='flex h-screen rounded-3xl bg-[--bg-board'> 
+         { newCurrentB && <><SideNav allUsers={allUsers} newCurrentB={newCurrentB} setNewCurrentB = {setNewCurrentB}  allBoards={allBoards} setAllBoards={setAllBoards}  session={session}/>
+       <div className=''>
+          
+        {newCurrentB && <Board session={session} allUsers={allUsers} newCurrentB={newCurrentB} setNewCurrentB = {setNewCurrentB}  allBoards={allBoards} setAllBoards={setAllBoards}></Board>}
        </div>
      {/* <RightNav currentBoardId={currentBoardId} boardsArray={boards}/> */}
 

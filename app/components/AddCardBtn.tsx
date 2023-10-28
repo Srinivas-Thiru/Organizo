@@ -6,11 +6,35 @@ import React, { useState } from 'react'
 import AddCardModal from './AddCardModal'
 import ButtonCmp from './Button/ButtonCmp'
 import "./Button/ButtonCmp.css"
+import "../globals.css"
 
-const AddCardBtn = ({newLists, setNewLists, cards, setCards, newCurrentB, id, session}) => {
-    
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic'
+
+const ReactQuill = dynamic(() => import('react-quill'), {
+    ssr: false, // Ensure it's not imported during server-side rendering
+  });
+
+const AddCardBtn = ({boardUsers, newLists, setNewLists, cards, setCards, newCurrentB, id, session}) => {
+
+      
     const [isOpen, setIsOpen] = useState(false)
     const [selectedUsers, setSelectedUsers] = useState([]);
+    const [description, setDescription] = useState('')
+    
+    const handleUserSelection = (userId) => {
+        if (selectedUsers.includes(userId)) {
+        // User is unchecking, remove the user ID from the list
+        setSelectedUsers(selectedUsers.filter((id) => id !== userId));
+        } else {
+        // User is checking, add the user ID to the list
+        setSelectedUsers([...selectedUsers, userId]);
+        }
+    };
+    
+
+    
+    
     const setModal = (prev) => {
         return setIsOpen(!prev)
     }
@@ -24,15 +48,12 @@ const AddCardBtn = ({newLists, setNewLists, cards, setCards, newCurrentB, id, se
 
     async function handleClick(e: any) {
         e.preventDefault()
-        // if (selectedUsers.length === 0) {
-        //     alert("Please assign the card to atleast one of the users.");
-        //     return; // Prevent form submission
-        // }
+
         const data = {
             title: String(e.target.title.value),
-            description: String(e.target.description.value),
-            assignedUsers:[session.user._id],
-            labels: String(e.target.label.value),
+            description: description,
+            assignedUsers:[...selectedUsers, session.user._id],
+            label: String(e.target.label.value),
             dueDate: formatDueDate(e.target.dueDate.value),
             listId:id
         }        
@@ -51,6 +72,7 @@ const AddCardBtn = ({newLists, setNewLists, cards, setCards, newCurrentB, id, se
             const newCard = await res.json();
             setCards((prevCards) => [...prevCards, newCard.card]);
             console.log('newcard:', newCard)
+            setDescription('')
         }            
     }
 
@@ -76,19 +98,28 @@ const AddCardBtn = ({newLists, setNewLists, cards, setCards, newCurrentB, id, se
     }
 
     return (
-        <>
+    <>
         {isOpen && 
         <AddCardModal setIsOpen={setIsOpen} isOpen = {isOpen} >
-            <div> 
-                <span className="flex justify-center font-bold text-3xl">New Card</span>
+            <div className='FormModal'> 
+                <span className=" flex justify-center font-bold text-3xl">New Card</span>
                 <form onSubmit={handleClick}>
                     <div className='flex flex-col my-4'>
                         <label htmlFor="title">Card Title: </label>
                         <input required={true}  className='border-solid bg-gray-100 border-spacing-1' type="text" id="title"/>
                     </div>
-                    <div className='flex flex-col my-4'>
+                    {/* <div className='flex flex-col my-4'>
                         <label htmlFor="description">Card Description: </label>
                         <textarea required={true} className='border-solid bg-gray-100 border-spacing-1' rows={4}  id="description"/>
+                    </div> */}
+                    <div className="flex flex-col my-4 ">
+                        <label htmlFor="description">Card Description:</label>
+                        <div className=' bg-gray-300' >
+                            <ReactQuill
+                            value={description}
+                            onChange={(value) => setDescription(value)}
+                            />
+                        </div>
                     </div>
                     <div className='flex flex-col my-4'>
                         <label htmlFor="label">Label: </label>
@@ -98,9 +129,10 @@ const AddCardBtn = ({newLists, setNewLists, cards, setCards, newCurrentB, id, se
                         <label htmlFor="dueDate">Due Date (Today onwards): </label>
                         <input required={true} className='border-solid bg-gray-100 border-spacing-1' type="date" id="dueDate" min={getTomorrowDate()}  />
                     </div>
-                    {/* <div className='flex flex-col my-4'>
-                        <label>Assigned Users(Select atleast one):</label>
-                        {uniqueUsers.map((user) => (
+                    <div className='flex flex-col my-4'>
+                        <label>Assign to a Member?</label>
+                        {boardUsers.length === 1 && <>No Members!</>}
+                        {boardUsers.map((user) => (user._id !== session.user._id &&
                             <div key={user._id} className='flex items-center'>
                             <input
                                 type='checkbox'
@@ -114,18 +146,17 @@ const AddCardBtn = ({newLists, setNewLists, cards, setCards, newCurrentB, id, se
                         </div>
                             ))}
                             
-                    </div> */}
+                    </div>
 
-                                        
-                    <Button type='submit' className='px-4 py-1 mb-3 w-24 bg-gray-700 text-white '>Submit</Button>
+                    <button type='submit' className='px-4 py-1 my-4 w-24 bg-[--bg-sideNav] hover:bg-[--bg-list] rounded-md text-white '>Submit</button>
                 </form>
             </div>
         </AddCardModal>
         }
-        <div className='flex justify-center w-full text-black '>
-            <button className='glass-button mx-1 my-4 bg-[#dcd6cc73] hover:bg-[#dcd6cc]' id={id} handleClick={handleClickAddCard}>+</button>
+        <div className=' -z-10 flex justify-center text-black '>
+            <button className='glass-button mx-1 my-4 bg-[#dcd6cc73] w-36 hover:bg-[#dcd6cc]' id={id} onClick={handleClickAddCard}>+</button>
         </div>
-        </>
+    </>
   )
 }
 
@@ -149,12 +180,3 @@ export default AddCardBtn
 //     }
 // })
 
-// const handleUserSelection = (userId) => {
-//     if (selectedUsers.includes(userId)) {
-//     // User is unchecking, remove the user ID from the list
-//     setSelectedUsers(selectedUsers.filter((id) => id !== userId));
-//     } else {
-//     // User is checking, add the user ID to the list
-//     setSelectedUsers([...selectedUsers, userId]);
-//     }
-// };

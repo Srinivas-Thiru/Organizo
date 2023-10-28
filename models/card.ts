@@ -45,7 +45,7 @@ export default Card
   "title": "Task 1",
   "description": "Description of the task",
   "dueDate": "2023-12-31T23:59:59Z",
-  "labels": ["Label 1", "Label 2"],
+  "label ": ["Label 1", "Label 2"],
   "assignedUsers": [ObjectId("user_id_1"), ObjectId("user_id_2")]
 }
 */

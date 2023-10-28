@@ -3,7 +3,8 @@
 import { Button } from '@mui/material'
 import React, { useState } from 'react'
 import AddCardModal from './AddCardModal'
-import ButtonCmp from './Button/ButtonCmp'
+import  './Button/ButtonCmp.css'
+import "../globals.css"
 
 const AddListBtn = ({allBoards, setAllBoards,  newLists, setNewLists, boardId, setNewCurrentB, newCurrentB}) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -62,8 +63,8 @@ const AddListBtn = ({allBoards, setAllBoards,  newLists, setNewLists, boardId, s
             </div>
         </AddCardModal>
         }
-        <div className='w-[30ch] text-[rgba(255,255,255,0.8)]'>
-          <ButtonCmp id={"addListBtn"} handleClick={handleClick}> + Add New List</ButtonCmp>
+        <div className='w-[30ch] px-4 text-[rgba(0,0,0,0.8)] '>
+          <button className='list-button z-10 hover:bg-[#0000002c] ' id={"addListBtn"} onClick={handleClick} > + Add New List</button>
         </div>
         
     </div>

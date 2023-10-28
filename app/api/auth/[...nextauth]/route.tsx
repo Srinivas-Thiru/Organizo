@@ -8,12 +8,13 @@ export const authOptions = {
     providers : [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENTID,
-            clientSecret: process.env.GOOGLE_CLIENTSECRET
+            clientSecret: process.env.GOOGLE_CLIENTSECRET,
+            callBackUrl: 'http://localhost:3000/home'
         })
     ],
     callbacks: {
         async signIn({user , account}) {
-            const {name, email} = user
+            const {name, email,image} = user
             if(account.provider == "google"){
                 try{
                     await connectMongoDB()
@@ -26,7 +27,7 @@ export const authOptions = {
                                 "Content-Type" : "application/json",
                             },
                             body: JSON.stringify({
-                                name,email
+                                name,email,image
                             })
                         })
                         if(res.ok){

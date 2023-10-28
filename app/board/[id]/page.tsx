@@ -4,14 +4,11 @@ import ProfileView from '@/app/components/ProfileView'
 import UserInfo from '@/app/components/UserInfo'
 import { getServerSession } from 'next-auth'
 import Link from 'next/link'
-import { authOptions } from './api/auth/[...nextauth]/route'
-import AddCardModal from './components/AddCardModal'
-import Board from './components/Board/Board'
-import BoardList from './components/BoardList'
-import Card from './components/Card'
-import HomePage from './components/HomePage'
-import SideNav from './components/SideNav'
 
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+
+import HomePage from '@/app/components/HomePage'
+import SideNavAndBoard from '@/app/components/SideNavAndBoard'
 
 const getUserId = async (session) => {
   try {
@@ -91,6 +88,7 @@ const getCards = async(list) => {
             console.log("Error: ", err);
         }
     })
+
 }
 
     const getCard = async (cardId) => {
@@ -124,7 +122,8 @@ const getCards = async(list) => {
       }
 
 
-export default async function Home() {
+export default async function boardPage({params}) {
+    const id = params
 
 
   const session = await getServerSession(authOptions)
@@ -227,11 +226,12 @@ export default async function Home() {
     })
     const newBoards = boardsData
 
-    const allUsers = await getUsers() || []
+
+    const allUsers = await getUsers()
 
   return (
-    <div className=''>
-      <HomePage allUsers={allUsers} newBoards={newBoards} boardsData={allBoards.boards} session={userDetials} />
+    <div className='flex h-screen'>
+        <SideNavAndBoard boardId={id} allUsers={allUsers} newBoards={newBoards} boardsData={boardsData}  session={userDetials}  />
     </div>
     )
 }

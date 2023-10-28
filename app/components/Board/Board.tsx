@@ -12,9 +12,14 @@ import RightNav from '../RightNav';
 import DeleteBoard from './DeleteBoard';
 import BoardNav from './BoardNav';
 import "./board.css"
+import "../../globals.css"
+
   
-const Board =  ({newCurrentB, setNewCurrentB, setAllBoards, allBoards, session }) => {
+const Board =  ({allUsers,newCurrentB, setNewCurrentB, setAllBoards, allBoards, session }) => {
   //NEWWAY
+
+
+  
 
   const getList = async(listId) => {
     try {
@@ -28,6 +33,15 @@ const Board =  ({newCurrentB, setNewCurrentB, setAllBoards, allBoards, session }
     } catch (err) {
         console.log("Error: ", err);
     }
+}
+
+const onBoardUpdate = async(response) => {
+    const newBoards = allBoards.map((board) => board._id === response.board._id ? response.board : board)
+    setAllBoards(newBoards)
+    console.log("Updated Boards: ",newBoards)
+    setNewCurrentB(response.board)
+    console.log("Updated Board Name: ",response.board)
+
 }
 
 const[newLists, setNewLists] = useState([])
@@ -60,21 +74,22 @@ useEffect(() => {
       setNewCurrentB(updatedCurrentB);
     }
   }
-}, [allBoards]);
+}, [allBoards, newLists]);
 
 
   async function newDelBoard(e: any) {
+
     e.preventDefault();
     
     if (window.confirm('Are you sure?')){
     try {
-      const res = await fetch(`http://localhost:3000/api/boards?id=${e.target.id}`,{
+      const res = await fetch(`http://localhost:3000/api/boards?id=${newCurrentB._id}`,{
         method: "DELETE"
       })
 
     if (res.ok) {
       alert("Board Deleted!")
-      setAllBoards((prevAllBoards) => prevAllBoards.filter((obj) => obj._id !== e.target.id))
+      setAllBoards((prevAllBoards) => prevAllBoards.filter((obj) => obj._id !== newCurrentB._id))
       console.log("AFTER DELETED: ",allBoards)
       if (allBoards.length > 0) {
         setNewCurrentB(allBoards[allBoards.length - 2]);
@@ -88,18 +103,19 @@ useEffect(() => {
       console.error('Error deleting card:', error);
     }
   } 
+
 }
 
   return (
     <div className='flex rounded-lg '>
-    <div className='board scrollbar-invisble mr-3 ' style={{  height: '89vh', width:'89vw', overflowX: "scroll" }}>
-      <BoardNav newCurrentB={newCurrentB} setNewCurrentB={setNewCurrentB} newDelBoard={newDelBoard} />
+    <div className='board scrollbar-invisble mr-3 ' style={{  height: '89vh',  overflowX: "scroll" }}>
+      {newCurrentB && <BoardNav newCurrentB={newCurrentB} setNewCurrentB={setNewCurrentB} newDelBoard={newDelBoard} onBoardUpdate={onBoardUpdate} />}
      {/* {// w-screen} */}
 
-     <div className='flex pt-5 mt-10'>
+     <div className='flex'>
 
-     {newLists && newLists.map((obj) => obj && <ListComponent key={obj._id} session={session}  newCurrentB={newCurrentB}  newLists={newLists} setNewLists={setNewLists} listObj={obj} setNewCurrentB={setNewCurrentB} allBoards={allBoards} setAllBoards={setAllBoards} />)}
-     <AddListBtn allBoards={allBoards} setAllBoards={setAllBoards} newCurrentB={newCurrentB} newLists={newLists} setNewLists={setNewLists} boardId={newCurrentB._id} setNewCurrentB={setNewCurrentB} >
+     {newLists && newLists.map((obj) => obj && <ListComponent allUsers={allUsers} key={obj._id} session={session}  newCurrentB={newCurrentB}  newLists={newLists} setNewLists={setNewLists} listObj={obj} setNewCurrentB={setNewCurrentB} allBoards={allBoards} setAllBoards={setAllBoards} />)}
+     <AddListBtn key={newCurrentB.title} allBoards={allBoards} setAllBoards={setAllBoards} newCurrentB={newCurrentB} newLists={newLists} setNewLists={setNewLists} boardId={newCurrentB._id} setNewCurrentB={setNewCurrentB} >
         + Add List
      </AddListBtn>
 

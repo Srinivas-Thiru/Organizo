@@ -4,15 +4,15 @@ import HomeContent from './HomeContent'
 import SignInBtn from './SignInBtn'
 import SideNavAndBoard from './SideNavAndBoard'
 
-const HomePage = ({newBoards, boardsData, session}) => {
+const HomePage = ({allUsers, newBoards, boardsData, session}) => {
 
 
     return (
         <>
         {
-            session ? 
+            session.user ? 
             <div className='flex h-screen'>
-                <SideNavAndBoard newBoards={newBoards} boardsData={boardsData}  session={session}  />
+                <SideNavAndBoard allUsers={allUsers} newBoards={newBoards} boardsData={boardsData}  session={session}  />
             </div>
             :
             <>

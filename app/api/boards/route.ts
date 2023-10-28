@@ -25,7 +25,7 @@ export async function POST(request) {
         cards.push(new Card({
             title: ` Ticket ${i}` ,
             description: '',
-            labels: [""],
+            label: [""],
             assignedUsers:[users[0]],
             dueDate: tomorrow
         }))
