@@ -48,7 +48,7 @@ const DeleteBoard = ({onBoardUpdate,newCurrentB, delBoard, setNewCurrentB}) => {
            <form onSubmit={updateBoard}>
                <div className='flex flex-col my-4'>
                    <label htmlFor="title">Board Title: </label>
-                   <input required={true}  className='border-solid bg-gray-100 border-spacing-1' type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
+                   <input autoFocus required={true}  className='border-solid bg-gray-100 border-spacing-1' type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
                </div>
                <button type='submit' className='px-4 py-1 my-4 w-24 bg-[--bg-sideNav] hover:bg-[--bg-list] rounded-md text-white '>Submit</button>
            </form>
@@ -58,13 +58,11 @@ const DeleteBoard = ({onBoardUpdate,newCurrentB, delBoard, setNewCurrentB}) => {
 
 
 
-
       <div className=' relative group '>
-          <div className=' absolute w-[10ch] hidden group-hover:block bg-white right-0 mt-2 py-2 h-25  shadow-lg rounded-md'>
+          <div className='dropDown absolute w-[10ch] hidden group-hover:block  bg-white right-0 mt-2 py-2 h-25  shadow-lg rounded-md'>
               <button onClick={() => setShowModal(!showModal)} className=' block w-[10ch] px-4 py-2  text-slate-900 hover:bg-slate-100'>
                 Edit
               </button>
-
               <button  id={newCurrentB._id}   onClick={delBoard} className=' mr-3 w-[10ch] block px-4 py-2  text-slate-900 hover:bg-slate-100'>
                 Delete
               </button>

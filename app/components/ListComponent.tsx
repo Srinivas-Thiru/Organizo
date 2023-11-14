@@ -29,6 +29,7 @@ const ListComponent =  ({allUsers, allBoards, setAllBoards, newCurrentB, newList
           setShowModal(!showModal)
         }
     }
+
     catch (err) {
       console.log("Update Failed: ", err)
     }
@@ -116,7 +117,7 @@ const ListComponent =  ({allUsers, allBoards, setAllBoards, newCurrentB, newList
           <form onSubmit={updateList}>
               <div className='flex flex-col my-4'>
                   <label htmlFor="title">List Title: </label>
-                  <input required={true}  className='border-solid bg-gray-100 border-spacing-1' type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
+                  <input autoFocus required={true}  className='border-solid bg-gray-100 border-spacing-1' type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
               </div>
               <button type='submit' className='px-4 py-1 my-4 w-24 bg-[--bg-sideNav] hover:bg-[--bg-list] rounded-md text-white '>Submit</button>
           </form>
@@ -127,17 +128,16 @@ const ListComponent =  ({allUsers, allBoards, setAllBoards, newCurrentB, newList
 
 
 
-    <div style={{height: 'auto'}}>
-    <div className="w-[250px] rounded-lg shadow-md bg-[--bg-list] mx-5 list"  >
+    <div className=' ' >
+    <div className="list w-[250px] rounded-lg  shadow-md bg-[--bg-list] mx-5"  >
     <div className='flex justify-between items-center p-2'>
-    <h2 className="text-lg font-semibold  w-screen text-center">{newLists && (title)}</h2>
-
+    <h2 className=" text-lg text-[--text-list] font-semibold  w-screen text-center ">{newLists && (title)}</h2>
 
 
       {/* <RiDeleteBinLine  /> */}
 
       <div className='relative group z-10 '>
-          <div className='w-[10ch] absolute hidden group-hover:block bg-white right-0 mt-2 py-2 h-25 z-50 shadow-lg rounded-md'>
+          <div className=' dropDown w-[10ch] absolute hidden group-hover:block bg-white right-0 mt-2 py-2 h-25 z-50 shadow-lg rounded-md'>
 
               <button onClick={() => setShowModal(!showModal)} className='block px-4 py-2  w-[10ch] text-slate-900 hover:bg-slate-100'>
                 Edit
@@ -148,23 +148,24 @@ const ListComponent =  ({allUsers, allBoards, setAllBoards, newCurrentB, newList
 
           </div>
           <div className='z-10'>
-          <RiMoreLine style={{fontSize: '40px'}} />
+          <RiMoreLine style={{fontSize: '40px' , color:'var(--text-list)'}} />
           </div>
         </div>
 
     </div> 
 
-    <div >
+    {/* <div  className={`max-h-[67vh] z-20 ${cards.length > 6 && "overflow-y-scroll"}` } > */}
+     <div className="max-h-[67] z-20" >
       {cards && cards.map((card) => (
         <>
           <Card listObj={listObj} session={session} boardUsers={boardUsers} cards={cards} setCards={setCards} newCurrentB={newCurrentB}  cardObj={card} newLists={newLists} setNewLists={setNewLists} />
         </>
       ))}
-
       <AddCardBtn boardUsers={boardUsers} cards={cards} setCards={setCards} newCurrentB={newCurrentB} id={listObj._id} newLists={newLists} setNewLists={setNewLists} session={session}/>
 
     </div>
-  </div></div>
+  </div>
+  </div>
   </>
   )
 }

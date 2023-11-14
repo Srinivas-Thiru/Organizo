@@ -73,6 +73,7 @@ const AddCardBtn = ({boardUsers, newLists, setNewLists, cards, setCards, newCurr
             setCards((prevCards) => [...prevCards, newCard.card]);
             console.log('newcard:', newCard)
             setDescription('')
+            setSelectedUsers([])
         }            
     }
 
@@ -154,7 +155,7 @@ const AddCardBtn = ({boardUsers, newLists, setNewLists, cards, setCards, newCurr
         </AddCardModal>
         }
         <div className=' -z-10 flex justify-center text-black '>
-            <button className='glass-button mx-1 my-4 bg-[#dcd6cc73] w-36 hover:bg-[#dcd6cc]' id={id} onClick={handleClickAddCard}>+</button>
+            <button className='glass-button mx-1 my-4 bg-[#dcd6cca5] w-36 hover:bg-[#dcd6ccad]' id={id} onClick={handleClickAddCard}>+</button>
         </div>
     </>
   )

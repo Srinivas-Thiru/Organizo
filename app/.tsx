@@ -20,14 +20,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/LOGO 2.ico" className='rounded-full' />
+      </head>
       <body className={inter.className}>
-    <NextAuthProvider>
+      <NextAuthProvider>
 
         <NavBar />
         <div className=''>{children}</div>
         </NextAuthProvider>
         </body>
-
     </html>
   )
 }

@@ -60,7 +60,7 @@ const Card = ({listObj, session ,boardUsers, cards, setCards, newCurrentB, cardO
       className="card bg-[--bg-card] flex items-center justify-between border rounded-lg p-2 my-2 m-1 z-2 cursor-pointer"
       >
         
-      <span onClick={handleClick}  className=' w-max'>{cardObj.title}</span>
+      <span onClick={handleClick}  className='w-full'>{cardObj.title}</span>
       <CardMoreBtn listObj={listObj} newLists={newLists} setNewLists={setNewLists} id={cardObj._id} deleteReq={deleteReq} handleClick={handleClick} updateCard={updateCard} />
       </div>
 }

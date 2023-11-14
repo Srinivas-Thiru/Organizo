@@ -1,16 +1,9 @@
 
-import ListComponent from '@/app/components/ListComponent'
-import ProfileView from '@/app/components/ProfileView'
 import UserInfo from '@/app/components/UserInfo'
 import { getServerSession } from 'next-auth'
-import Link from 'next/link'
 import { authOptions } from './api/auth/[...nextauth]/route'
-import AddCardModal from './components/AddCardModal'
-import Board from './components/Board/Board'
-import BoardList from './components/BoardList'
-import Card from './components/Card'
 import HomePage from './components/HomePage'
-import SideNav from './components/SideNav'
+import HomeContent from './components/HomeContent'
 
 
 const getUserId = async (session) => {
@@ -198,29 +191,6 @@ export default async function Home() {
       return boardsArray;
     };
 
-    
-  //   const boardsArray = await getData();    
-
-  //   const addBoardMembers = async () => {
-  //     for (const board of boardsArray) {
-  //       board.boardMembers = [];
-    
-  //       for (const id of board.board.users) {
-  //         const user = await getUserData(id);
-  //         board.boardMembers.push(user.userData);
-  //       }
-  //     }
-  //   }
-    
-  //   await addBoardMembers()
-
-  //   const users = await getUsers()
-  //   const allUsers = users.filter((user) => user.email !== session.user.email)
-
-  //   const filteredBoards = boardsArray.filter((board) =>
-  //   board.boardMembers.some((user) => user._id === userId)
-  // );
-
     const allBoards = await getBoards()
     const boardsData = allBoards.boards.filter((board) => {
       return board.users.includes(userId) 
@@ -231,7 +201,14 @@ export default async function Home() {
 
   return (
     <div className=''>
+      {session.user ? 
       <HomePage allUsers={allUsers} newBoards={newBoards} boardsData={allBoards.boards} session={userDetials} />
+      
+      :
+      <HomeContent />
+      }
+
+
     </div>
     )
 }

@@ -106,14 +106,14 @@ useEffect(() => {
 
 }
 
+
   return (
-    <div className='flex rounded-lg '>
-    <div className='board scrollbar-invisble mr-3 ' style={{  height: '89vh',  overflowX: "scroll" }}>
-      {newCurrentB && <BoardNav newCurrentB={newCurrentB} setNewCurrentB={setNewCurrentB} newDelBoard={newDelBoard} onBoardUpdate={onBoardUpdate} />}
+    <div className=' flex  '>
+    <div className='board bg-[--bg-board] opacity-100  mr-3 ' style={{  overflowX: "scroll" }}>
+      {newCurrentB && <BoardNav session={session} allUsers={allUsers} newCurrentB={newCurrentB} setNewCurrentB={setNewCurrentB} newDelBoard={newDelBoard} onBoardUpdate={onBoardUpdate} />}
      {/* {// w-screen} */}
-
      <div className='flex'>
-
+     {/* bg-black mt-20 */}
      {newLists && newLists.map((obj) => obj && <ListComponent allUsers={allUsers} key={obj._id} session={session}  newCurrentB={newCurrentB}  newLists={newLists} setNewLists={setNewLists} listObj={obj} setNewCurrentB={setNewCurrentB} allBoards={allBoards} setAllBoards={setAllBoards} />)}
      <AddListBtn key={newCurrentB.title} allBoards={allBoards} setAllBoards={setAllBoards} newCurrentB={newCurrentB} newLists={newLists} setNewLists={setNewLists} boardId={newCurrentB._id} setNewCurrentB={setNewCurrentB} >
         + Add List

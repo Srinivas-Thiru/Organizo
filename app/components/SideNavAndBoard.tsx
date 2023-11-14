@@ -75,8 +75,14 @@ const SideNavAndBoard = ( {boardId ={}  ,allUsers,newBoards, boardsData, session
 }
 
     return (
-    <div className='flex h-screen rounded-3xl bg-[--bg-board'> 
-         { newCurrentB && <><SideNav allUsers={allUsers} newCurrentB={newCurrentB} setNewCurrentB = {setNewCurrentB}  allBoards={allBoards} setAllBoards={setAllBoards}  session={session}/>
+    <div className='flex rounded-3xl h-[92vh]'> 
+
+         { newCurrentB && <>
+         
+         <div className="bg-[--bg-navbar]">
+          <SideNav allUsers={allUsers} newCurrentB={newCurrentB} setNewCurrentB = {setNewCurrentB}  allBoards={allBoards} setAllBoards={setAllBoards}  session={session}/>
+         </div>
+
        <div className=''>
           
         {newCurrentB && <Board session={session} allUsers={allUsers} newCurrentB={newCurrentB} setNewCurrentB = {setNewCurrentB}  allBoards={allBoards} setAllBoards={setAllBoards}></Board>}

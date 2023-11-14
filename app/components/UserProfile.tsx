@@ -2,7 +2,7 @@ import React from 'react';
 
 const UserProfile = ({ profilePic, name, email }) => {
   return (
-    <div className="py-4 mx-auto mt-5 rounded-lg bg-[--bg-board]" style={{width: '80vw'}}>
+    <div className="py-4 mx-auto mt-5 rounded-lg bg-[--bg-board]" style={{width: 'min(1000px, 80vw)'}}>
       <div className="flex w-full p-8 rounded-lg shadow-md">
         <img
           src={profilePic}

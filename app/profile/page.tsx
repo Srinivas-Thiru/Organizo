@@ -38,10 +38,12 @@ export default async function Home() {
       {session?.user ? <>
    
         <UserProfile profilePic={session?.user?.image} name={session?.user?.name} email={session?.user?.email} />
+
         </>
       :<>
       <HomeContent />
-      <SignInBtn /></>}
+      <SignInBtn />
+      </>}
     </div>
     )
 }

@@ -4,10 +4,6 @@ import {NextResponse} from "next/server"
 import List from "@/models/list"
 import Card from "@/models/card"
 
-
-
-
-
 export async function GET() {
     await connectMongoDB()
     const boards = await Board.find();
@@ -59,7 +55,6 @@ export async function DELETE(request)  {
     if(deletedBoard.lists.length !== 0){
         deletedBoard.lists.map(async (listId) => {
             const list = await List.findById(listId);
-            console.log('LIST API: ', JSON.stringify(list))
             if (!list) {
                 return NextResponse.json({ message: "List not found" }, { status: 404 });
             }

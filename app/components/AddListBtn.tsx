@@ -63,8 +63,8 @@ const AddListBtn = ({allBoards, setAllBoards,  newLists, setNewLists, boardId, s
             </div>
         </AddCardModal>
         }
-        <div className='w-[30ch] px-4 text-[rgba(0,0,0,0.8)] '>
-          <button className='list-button z-10 hover:bg-[#0000002c] ' id={"addListBtn"} onClick={handleClick} > + Add New List</button>
+        <div className='w-[30ch] px-4 text-[rgba(0,0,0,0.7)] ' >
+          <button className='list-button z-10 opacity-90  hover:opacity-100 ' id={"addListBtn"} onClick={handleClick}  style={{boxShadow: '2px 2px 4px black'}}> + Add New List</button>
         </div>
         
     </div>

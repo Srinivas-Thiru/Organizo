@@ -9,17 +9,10 @@ const HomePage = ({allUsers, newBoards, boardsData, session}) => {
 
     return (
         <>
-        {
-            session.user ? 
             <div className='flex h-screen'>
                 <SideNavAndBoard allUsers={allUsers} newBoards={newBoards} boardsData={boardsData}  session={session}  />
             </div>
-            :
-            <>
-                <HomeContent />
-                <SignInBtn />
-            </>
-        }
+          
         </>
     )
 }

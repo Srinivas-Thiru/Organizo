@@ -31,7 +31,7 @@ export const authOptions = {
                             })
                         })
                         if(res.ok){
-    
+
                             return user
                         }
                     }else{

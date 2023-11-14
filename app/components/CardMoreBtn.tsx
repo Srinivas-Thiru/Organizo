@@ -55,9 +55,9 @@ const CardMoreBtn = ({listObj, id, handleClick, deleteReq, updateCard, newLists,
 
 
   return (
-    <div>
+    <div className='card-more'>
       <div className="z-1 relative group">
-        <div className="z-50 absolute w-[10ch] hidden group-hover:block bg-white right-0 mt-2 py-2 h-25 shadow-lg rounded-md">
+        <div className="dropDown z-50 absolute w-[10ch] hidden group-hover:block bg-white right-0 mt-2 py-2 h-25 shadow-lg rounded-md">
           <button
             onClick={handleClick}
             className="z-50 block w-[10ch] px-4 py-2 text-slate-900 hover:bg-slate-100"
@@ -70,14 +70,14 @@ const CardMoreBtn = ({listObj, id, handleClick, deleteReq, updateCard, newLists,
             <button
                onMouseEnter={() => setIsMoveDropdownOpen(true)}  
                onMouseLeave={() => setIsMoveDropdownOpen(false)}             
-              className="z-50 block w-[10ch] px-4 py-2 text-slate-900 hover:bg-slate-100"
+              className= " z-50 block w-[10ch] px-4 py-2 text-slate-900 hover:bg-slate-100"
             >
               <span className=' flex justify-center '>Move<RiArrowDropRightFill  style={{
          display:"inline-block" ,fontSize: '3ch'
         }} /></span>
             </button>
             {isMoveDropdownOpen  && 
-             <div id="listofLists" onMouseEnter={() => setIsMoveDropdownOpen(true)} onMouseLeave={() => setIsMoveDropdownOpen(false)} className="z-50 absolute w-[10ch] -top-[1ch] left-[10ch] bg-white mt-2 py-2 h-auto shadow-lg rounded-md">
+             <div id="listofLists" onMouseEnter={() => setIsMoveDropdownOpen(true)} onMouseLeave={() => setIsMoveDropdownOpen(false)} className=" dropDown z-50 absolute w-[10ch] -top-[1ch] left-[10ch] bg-white mt-2 py-2 h-auto shadow-lg rounded-md">
             {newLists.map((list) => list._id !== listObj._id && (
               <div className="z-50 block w-[10ch] py-2 text-slate-900 hover:bg-slate-100 " >
                 <button className='w-[10ch] ' onClick={moveCard} id={list._id}>{list.title.length > 6 ? list.title.slice(0,7) + '...' : list.title}</button>

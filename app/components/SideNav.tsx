@@ -7,6 +7,7 @@ import { Button } from '@mui/material'
 import { UsersDropdown } from './UsersDropdown'
 import  './Button/ButtonCmp.css'
 import "../globals.css"
+import UserSelection from './UserSelection'
 
 
 
@@ -20,12 +21,19 @@ const SideNav = ({allUsers,newCurrentB, setNewCurrentB, setAllBoards, allBoards,
      return setIsOpen(!isOpen)
  }
 
+ const getIds = (users) => {
+    return users.map((user) => user._id)
+ }
+
  async function createBoard(e: any) {
+
      e.preventDefault();
+      const newUsers = getIds(selectedUsers)
+
      const data = {
          title: e.target.title.value,
          lists: [],
-         users: [...selectedUsers,session.user._id]
+         users: [session.user._id,...newUsers]
      }
 
      const res = await fetch("http://localhost:3000/api/boards", {
@@ -46,7 +54,9 @@ const SideNav = ({allUsers,newCurrentB, setNewCurrentB, setAllBoards, allBoards,
          setAllBoards([...allBoards, newBoard.board])
 
      }
+     setSelectedUsers([])
      setIsOpen(!isOpen)
+
  }
 
 
@@ -60,7 +70,7 @@ const [selectedUsers, setSelectedUsers] = useState([])
 
    
   return (
-    <div>
+    <div className=' '>
         {
           isOpen && 
           <AddCardModal setIsOpen={setIsOpen} isOpen = {isOpen} >
@@ -72,8 +82,9 @@ const [selectedUsers, setSelectedUsers] = useState([])
                         <label htmlFor="title">Board Title: </label>
                         <input required={true}  className='border-solid bg-gray-100 border-spacing-1' type="text" id="title"/>
                     </div>                                        
-                    <div className='flex flex-col my-4'>
-                      <UsersDropdown session={session} allUsers={allUsers} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}  />
+                    
+                    <div className="flex flex-col my-4">
+                      <UserSelection selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} allUsers={allUsers} session={session}/>
                     </div>
                     <Button type='submit' className='px-4 py-1 mb-3 w-24 bg-gray-700 text-white '>Submit</Button>
                 </form>
@@ -83,13 +94,19 @@ const [selectedUsers, setSelectedUsers] = useState([])
 
 
 
-        <div className="sidenav  bg-[--bg-sideNav] text-[--text-sideNav] text-center " style={{ height: '90vh'}}>
+        <div className="pb-10  overflow-y-scroll sidenav  bg-[--bg-sideNav] text-[--text-sideNav] text-center ">
+
+        {/* <div className='text-[15px] py-[2.35ch] mb-4 font-mono  text-center shadow-md'>
+        {session.user.name}
+        </div> */}
+
         <div className='text-[15px] py-[2.35ch] mb-4 font-mono  text-center shadow-md'>
-          YOUR BOARDS
+        YOUR BOARDS
         </div>
+
         {allBoards.map((board) => (
           board._id === newCurrentB._id ?
-          <div key={board._id} onClick={handleSideNavClick} id={board._id} className=" text-black sidenavbtn-selected bg-[--bg-board]  cursor-pointer my-1  border-solid border-black py-3">
+          <div key={board._id} onClick={handleSideNavClick} id={board._id} className=" sidenavbtn-selected bg-[--bg-board]  cursor-pointer my-1  border-solid border-black py-3">
             {board.title}
           </div>
           :
@@ -97,8 +114,9 @@ const [selectedUsers, setSelectedUsers] = useState([])
             {board.title}
           </div>
         ))}
+
         <div >
-          <button style={{width: 'min(80%, 30ch)'}} className='mt-3 hover:bg-[#dcd6cc] hover:text-[#000] glass-button' onClick={handleClick}  id={session.user._id} > + Create New Board </button>
+          <button style={{width: 'min(90%, 30ch)'}} className='mt-3 hover:bg-[--bg-card] glass-button border hover:scale-105 hover:text-[#000] ' onClick={handleClick}  id={session.user._id} > + Create New Board </button>
         </div>
       </div>
 

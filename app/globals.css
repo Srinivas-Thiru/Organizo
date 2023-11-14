@@ -6,28 +6,52 @@
   /* --foreground-rgb: #4F5453;
   --background-start-rgb:#718fc0;
   --background-end-rgb: #f2f1ef;  */
+/* 
   --bg-navbar: #AD8B73;
-  --bg-boardNav:#0000002c;
+  --bg-boardNav:#00000012;
   --text-navbar: #fff;  
   --bg-board: #FFFBE9;
   --bg-sideNav: #603601;
   --text-sideNav: #fff; 
   --bg-list: #AD8B73;
-  --bg-card: #fff;
+  --bg-card: #fff;    */
+
+  --navBar-height: 9vh;
+
+  
+  --bg-navbar: #162936;
+  --bg-boardNav:#fbfbfb;
+  --text-navbar: #f8f8f8;  
+  --bg-board: #fbfbfb;
+  --bg-sideNav: #b4c0c5;
+  --text-sideNav: #162936; 
+  --bg-list: #e7e7e7;
+  --bg-card: #f8f8f8;   
+  --text-list: #000;
+
+
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  --bg-navbar: #000000;
+  --bg-boardNav:rgba(0, 0, 0, 0.15);
+  --text-navbar: #fff;  
+  --bg-board:#b4b4b45a;
+  --bg-sideNav: #6f6f6f71;  
+  --text-sideNav: #fff; 
+  --bg-list: #000000b9;
+  --bg-card: #fff;
+  --text-list: #fff;
   }
-} */
+}
 
 body {
   overflow: hidden;
-  background-color: var(--bg-navbar);
-  color: rgba(var(--foreground-rgb), 1);
+}
+
+.home-content {
+  background: linear-gradient(to bottom, #9ecce0, #fff);
 }
 
 .FormModal>input{
@@ -38,27 +62,44 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+.navBar{
+  height : var(--navBar-height);
+  /* background: radial-gradient(at center,#fff, #232323); */
+}
+
 .board {
-  background-color: var(--bg-board);
+  height: calc(100vh - var(--navBar-height));
+  /* background-image: url("../public/try.webp"); */
+
+  /* background: var(--bg-board); */
   width: 89vw;
 }
 
-
 .sidenav {
+  
+  height: calc(100vh - var(--navBar-height));
   border-radius: 20px 0 0 0;
   width: max(11vw);
 }
 .sidenavbtn-selected {
   border-radius: 20px 0 0 20px;
   color: black;
+  /* background: linear-gradient(to bottom, #3f7fff, #e04545); */
     /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); */
     /* background: radial-gradient(at center, #fff, #A9A59D); */
   }
 
   .sidenavbtn {
     margin: auto;
+
   }
   
+  .logo { 
+      font-size: 2rem; 
+      text-shadow: 1px 1px 3px var(--bg-sideNav);
+      
+  }
+
   .sidenavbtn:hover {
     border-radius: 20px 0 0 20px;
     color: black;
@@ -88,9 +129,22 @@ body {
   }
 
   .card {
+    z-index : 1;
+ background-color: var(--bg-card);
+    animation: fade-in 1s ease; 
+
+  }
+
+  .start-animation {
     animation: fade-in 1s ease; 
   }
+
+  .card-more {
+
+  }
+
   .list {
+
     margin-top: 8ch;
     animation: fade-in 1s ease; 
   }
@@ -112,7 +166,6 @@ body {
   }
 }
   
-
 .delboard {
 
 }
@@ -122,15 +175,30 @@ body {
 }
 
 .board{
-
+  
+  /* background: linear-gradient(to bottom, #ae40408f, #78adea87); */
 }
 
 .boardNav{
+  
 
 }
 
 .dropDown{
+  animation: drop 1s forwards;
+}
 
+@keyframes drop {
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 0.7;
+  }
+  100%{
+    opacity: 1;;
+  }
+  
 }
 
 .sideNav{
@@ -138,10 +206,10 @@ body {
 }
 
 .sideNavBoardName{
-
+  
 }
 
-.listComp{
+.list{
 
 }
 
@@ -168,7 +236,3 @@ body {
 .NavBar{
 
 }
-
-
-
-

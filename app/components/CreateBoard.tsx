@@ -4,6 +4,7 @@ import { useState } from 'react'
 import AddCardModal from './AddCardModal'
 import { UsersDropdown } from './UsersDropdown'
 import { useRouter } from 'next/navigation'
+import UserSelection from './UserSelection'
 
 
 const CreateBoard = ({ newBoards, userDetials, allUsers }) => {
@@ -11,12 +12,17 @@ const CreateBoard = ({ newBoards, userDetials, allUsers }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [selectedUsers, setSelectedUsers] = useState([])
     const [allBoards,setAllBoards] = useState(newBoards)
+    
+    const getIds = (users) =>{ 
+        return users.map((user) => user._id)
+    }
     async function createBoard(e: any) {
       e.preventDefault();
+    const newUsers = getIds(selectedUsers)
       const data = {
           title: e.target.title.value,
           lists: [],
-          users: [...selectedUsers,userDetials.user._id]
+          users: [userDetials.user._id, ...newUsers]
       }
  
       const res = await fetch("http://localhost:3000/api/boards", {
@@ -35,6 +41,7 @@ const CreateBoard = ({ newBoards, userDetials, allUsers }) => {
           onUpdate(newBoard)
           newBoards = [...allBoards, newBoard.board]
       }
+      setSelectedUsers([])
       setIsOpen(!isOpen)
   }
   const router = useRouter()
@@ -59,9 +66,11 @@ const CreateBoard = ({ newBoards, userDetials, allUsers }) => {
                     <label htmlFor="title">Board Title: </label>
                     <input required={true}  className='border-solid bg-gray-100 border-spacing-1' type="text" id="title"/>
                 </div>                                        
-                <div className='flex flex-col my-4'>
-                  <UsersDropdown session={userDetials} allUsers={allUsers} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}  />
+             
+                <div className="flex flex-col my-4">
+                <UserSelection selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} allUsers={allUsers} session={userDetials}/>
                 </div>
+
                 <button type='submit' className='px-4 py-1 mb-3 w-24 bg-gray-700 text-white '>Submit</button>
             </form>
         </div>
