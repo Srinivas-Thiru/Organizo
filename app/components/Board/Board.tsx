@@ -7,7 +7,7 @@ import { authOptions } from '../../api/auth/[...nextauth]/route';
 import ListComponent from '../ListComponent';
 import { useSession } from 'next-auth/react';
 import AddListBtn from '../AddListBtn';
-import { Button } from '@mui/material';
+
 import RightNav from '../RightNav';
 import DeleteBoard from './DeleteBoard';
 import BoardNav from './BoardNav';
