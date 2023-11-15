@@ -56,7 +56,7 @@ const Card = ({listObj, session ,boardUsers, cards, setCards, newCurrentB, cardO
 
       {cardObj && 
 
-      <div draggable='true'
+      <div key={cardObj._id} draggable='true'
       className="card bg-[--bg-card] flex items-center justify-between border rounded-lg p-2 my-2 m-1 z-2 cursor-pointer"
       >
         

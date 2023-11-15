@@ -128,7 +128,7 @@ const ListComponent =  ({allUsers, allBoards, setAllBoards, newCurrentB, newList
 
 
 
-    <div className=' ' >
+    <div key={listObj?._id} className=' ' >
     <div className="list w-[250px] rounded-lg  shadow-md bg-[--bg-list] mx-5"  >
     <div className='flex justify-between items-center p-2'>
     <h2 className=" text-lg text-[--text-list] font-semibold  w-screen text-center ">{newLists && (title)}</h2>
