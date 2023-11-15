@@ -86,7 +86,7 @@ const [selectedUsers, setSelectedUsers] = useState([])
                     <div className="flex flex-col my-4">
                       <UserSelection selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} allUsers={allUsers} session={session}/>
                     </div>
-                    <Button type='submit' className='px-4 py-1 mb-3 w-24 bg-gray-700 text-white '>Submit</Button>
+                    <button type='submit' className='px-4 py-1 mb-3 w-24 bg-gray-700 text-white '>Submit</button>
                 </form>
             </div>
           </AddCardModal>

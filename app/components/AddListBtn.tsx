@@ -58,7 +58,7 @@ const AddListBtn = ({allBoards, setAllBoards,  newLists, setNewLists, boardId, s
                         <label htmlFor="title">List Title: </label>
                         <input required={true}  className='border-solid bg-gray-100 border-spacing-1' type="text" id="title"/>
                     </div>                                        
-                    <Button id={boardId} type='submit' className='px-4 py-1 mb-3 w-24 bg-gray-700 text-white '>Submit</Button>
+                    <button id={boardId} type='submit' className='px-4 py-1 mb-3 w-24 bg-gray-700 text-white '>Submit</button>
                 </form>
             </div>
         </AddCardModal>
