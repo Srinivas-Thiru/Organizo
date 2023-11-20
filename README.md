@@ -53,3 +53,7 @@ Learn more about Next.js and its functionalities:
 ## Deployment
 
 Refer to the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for detailed deployment instructions.
+
+
+##User-Interface
+![01](https://github.com/Srinivas-Thiru/Organizo/assets/110653801/4d6a8973-8bf3-4268-a006-36827062d031)
