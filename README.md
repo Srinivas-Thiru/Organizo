@@ -57,4 +57,8 @@ Refer to the [Next.js deployment documentation](https://nextjs.org/docs/deployme
 
 ## User-Interface
 
-![01](https://github.com/Srinivas-Thiru/Organizo/assets/110653801/4d6a8973-8bf3-4268-a006-36827062d031)
+
+
+https://github.com/Srinivas-Thiru/Organizo/assets/110653801/8848e1af-c00a-44ad-b1bb-1cb586757a85
+
+
